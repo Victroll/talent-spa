@@ -5,7 +5,6 @@ import '../styles/index.css';
 class Talent extends React.Component {
     constructor(props) {
         super(props);
-
         this.showImage = this.showImage.bind(this);
     }
     
@@ -17,6 +16,10 @@ class Talent extends React.Component {
             this.props.icon.posX * 128, 
             this.props.icon.posY * 128, 128, 128, 0, 0, 80, 80);
     }
+
+    componentDidUpdate() {
+        this.showImage();
+    }
     
     render() {
         return (
@@ -25,7 +28,8 @@ class Talent extends React.Component {
                 height="80" 
                 width="80">
                     <img src="./images/icons/full.png" id={ this.props.id + 'Img' } 
-                    onLoad={ this.showImage } />
+                    onLoad={ this.showImage }
+                    alt='' />
                 </canvas>
             </div>
         );
@@ -36,8 +40,8 @@ const mapStateToProps = function(store, ownProps) {
     return {
         name: "New talent",
         icon: {
-            posX: 0,
-            posY: 0
+            posX: store.talents[ownProps.id + 'Canvas'].posX,
+            posY: store.talents[ownProps.id + 'Canvas'].posY
         },
         description: "Add description"
     }
