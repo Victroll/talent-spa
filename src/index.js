@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import App from "./containers/app";
 import reducer from './reducers';
 
-const store = createStore(reducer, {value: 2});
+const store = createStore(reducer, {talents: []});
 
 ReactDOM.render(
     <Provider store={ store }>
