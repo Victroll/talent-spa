@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as Actions from '../actions';
 import '../styles/index.css';
 
 class Talent extends React.Component {
@@ -8,10 +7,6 @@ class Talent extends React.Component {
         super(props);
 
         this.showImage = this.showImage.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.addNewTalent(this);
     }
     
     showImage() {
@@ -48,13 +43,6 @@ const mapStateToProps = function(store, ownProps) {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addNewTalent: (talent) => dispatch(Actions.addNewTalent(talent))
-    };
-}
-
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps
 )(Talent);

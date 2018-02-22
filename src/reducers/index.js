@@ -7,9 +7,9 @@ export default function(state, action) {
             if (!state.talents.filter((talent) => {
                     return talent.props.id === action.talent.props.id;
                 }).length) {
-                    action.talent.showImage();
+                    //action.talent.showImage();
                     return {...state, 
-                        ['talents']: state.talents.push(action.talent)
+                        talents: state.talents.concat([action.talent])
                     };
             } else {
                 return state;
