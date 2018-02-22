@@ -1,19 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { TALENT_TREE_CONTAINER_ID } from '../constants/names';
+import ModalTalent from './modalTalent';
 import Talent from '../components/talent';
 import Draggable from 'gsap/Draggable';
 import * as Actions from '../actions';
-import '../styles/index.css';
+import { Button } from 'react-foundation';
+import ModalIcon from './modalIcon';
 
 class TalentTree extends React.Component {
     constructor(props) {
         super(props);
 
         this.addNewTalent = this.addNewTalent.bind(this);
+        this.openModalTalent = this.openModalTalent.bind(this);
+    }
+
+    openModalTalent(id) {
+        this.props.openModalTalent(id);
     }
 
     componentDidUpdate() {
+        const that = this;
+
         Draggable.create(".talent",
         {
             type: "x,y",
@@ -29,26 +38,33 @@ class TalentTree extends React.Component {
                     return Math.round(endValue / 80) * 80;
                 }
             },
-            onClick: () => {
+            onClick: (event) => {
+                that.openModalTalent(event.target.id);
             }
         });
     }
 
     addNewTalent() {
         this.props.addNewTalent(
-            <Talent id={ "talent" + this.props.talents.length }
-            key={ "talent" + this.props.talents.length } />
+            <Talent id={ "talent" + Object.keys(this.props.talentsObj).length }
+            key={ "talent" + Object.keys(this.props.talentsObj).length } />
         );
     }
 
     render() {
-        const { talents } = this.props;
+        const { talentsObj } = this.props;
+        const talents = [];
+
+        for (let id in talentsObj)
+            talents.push(talentsObj[id].talent);
 
         return (
             <div className="talent-tree-container" 
             id={ TALENT_TREE_CONTAINER_ID }>
                 { talents }
-                <button onClick={ this.addNewTalent }>+</button>
+                <Button onClick={ this.addNewTalent }>+</Button>
+                <ModalTalent />
+                <ModalIcon />
             </div>
         );
     }
@@ -56,13 +72,14 @@ class TalentTree extends React.Component {
 
 const mapStateToProps = (store) => {
     return {
-        talents: store.talents
+        talentsObj: store.talents
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addNewTalent: (talent) => dispatch(Actions.addNewTalent(talent))
+        addNewTalent: (talent) => dispatch(Actions.addNewTalent(talent)),
+        openModalTalent: (id) => dispatch(Actions.openModalTalent(id))
     }
 }
 
