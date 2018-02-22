@@ -3,9 +3,15 @@ import { connect } from 'react-redux';
 import { TALENT_TREE_CONTAINER_ID } from '../constants/names';
 import Talent from '../components/talent';
 import Draggable from 'gsap/Draggable';
+import * as Actions from '../actions';
 import '../styles/index.css';
 
 class TalentTree extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.addNewTalent = this.addNewTalent.bind(this);
+    }
     componentDidMount() {
         Draggable.create(".talent",
         {
@@ -23,9 +29,15 @@ class TalentTree extends React.Component {
                 }
             },
             onClick: () => {
-                
             }
         });
+    }
+
+    addNewTalent() {
+        this.props.addNewTalent(
+            <Talent id={ "talent" + this.props.talents.length }
+            key={ "talent" + this.props.talents.length } />
+        );
     }
 
     render() {
@@ -34,18 +46,26 @@ class TalentTree extends React.Component {
         return (
             <div className="talent-tree-container" 
             id={ TALENT_TREE_CONTAINER_ID }>
-                <Talent id={ "talent00" } xPos={ 0 } yPos={ 0 } />
+                { talents }
+                <button onClick={ this.addNewTalent }>+</button>
             </div>
         );
     }
 }
 
-const mapStateToProps = function(store) {
+const mapStateToProps = (store) => {
     return {
         talents: store.talents
     };
 }
 
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addNewTalent: (talent) => dispatch(Actions.addNewTalent(talent))
+    }
+}
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(TalentTree);
