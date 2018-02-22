@@ -12,7 +12,8 @@ class TalentTree extends React.Component {
 
         this.addNewTalent = this.addNewTalent.bind(this);
     }
-    componentDidMount() {
+
+    componentDidUpdate() {
         Draggable.create(".talent",
         {
             type: "x,y",
