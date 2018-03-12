@@ -3,6 +3,7 @@ import Rodal from 'rodal';
 import * as Actions from '../actions';
 import { connect } from 'react-redux';
 import 'rodal/lib/rodal.css';
+import Dialog from 'react-toolbox/lib/dialog/Dialog';
 
 class ModalIcon extends React.Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class ModalIcon extends React.Component {
 
     componentDidUpdate() {
         if (this.props.isOpen)
-            this.showIcons();
+            setTimeout(this.showIcons, 100);
+            //this.showIcons();
     }
 
     showIcons() {
@@ -44,16 +46,10 @@ class ModalIcon extends React.Component {
     
     render() {
         return (
-            <Rodal visible={ this.props.isOpen }
-            onClose={ this.props.closeModal }
-            height={ 600 } 
-            width={ 800 }
-            customStyles={{overflow: 'scroll'}} >
-                <h3>Icon selection</h3>
-                <hr />
-                    <canvas id='iconModalCanvas' width="4140" height="2208"
+            <Dialog className='modal' theme={{body: 'no-padding'}} active={ this.props.isOpen }>
+                <canvas id='iconModalCanvas' width="4140" height="2208"
                     onClick={ (e) => this.updateIconForm(e) }></canvas>
-            </Rodal>
+            </Dialog>
         );
     }
 }

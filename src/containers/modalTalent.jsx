@@ -5,37 +5,23 @@ import Rodal from 'rodal';
 import FormIcon from '../components/formIcon';
 import 'rodal/lib/rodal.css';
 import Button from 'react-toolbox/lib/button/Button';
+import Dialog from 'react-toolbox/lib/dialog/Dialog';
+import Input from 'react-toolbox/lib/input/Input';
 
 class ModalTalent extends React.Component {
 
+    actions = [
+        { label: 'Save', onClick: this.props.updateTalent },
+        { label: 'Cancel', onClick: this.props.closeModal }
+    ];
+
     render() {
         return (
-            <Rodal visible={ this.props.isOpen } 
-            onClose={ this.props.closeModal }
-            height={ 400 } >
-                <h3>Talent configuration</h3>
-                <hr/>
-                <form>
-                    <div className='row'>
-                        <div className='large-12 columns'>
-                            <label>Talent name
-                                <input type='text' placeholder='talent name' />
-                            </label>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='large-12 columns'>
-                            <label>Talent icon
-                                <br />
-                                <FormIcon />
-                            </label>
-                        </div>
-                    </div>
-                    <hr/>
-                    <Button onClick={ this.props.updateTalent } label='Ok' raised />
-                    <Button onClick={ this.props.closeModal } label='Cancel' raised />
-                </form>
-            </Rodal>               
+            <Dialog className='modal' title='Talent configuration' actions={ this.actions } active={ this.props.isOpen }>
+                <Input type='text' label='Name' maxLength={ 12 } />
+                <Input type='text' multiline label='Description' maxLength={ 12 } />               
+                <FormIcon />
+            </Dialog>           
         );
     }
 }

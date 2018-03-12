@@ -2,6 +2,13 @@
     height: 600px;
     width: 800px;
     padding-top: 4rem;
+    padding-left: calc(50% - 400px);
+    text-align: center;
+}
+
+.modal {
+    max-height: 75% !important;
+    overflow: auto !important;
 }
 
 .talent {
@@ -15,4 +22,8 @@
 
 .top-bar h1 {
     max-width: calc(50% - 10rem);
+}
+
+.no-padding {
+    padding: 0 !important;
 }

@@ -61,8 +61,9 @@ class TalentTree extends React.Component {
         return (
             <div className="talent-tree-container" 
             id={ TALENT_TREE_CONTAINER_ID }>
-                { talents }
                 <Button icon='add' onClick={ this.addNewTalent } raised/>
+                <hr />
+                { talents }
                 <ModalTalent />
                 <ModalIcon />
             </div>
