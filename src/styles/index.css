@@ -1,9 +1,18 @@
 .talent-tree-container {
     height: 600px;
     width: 800px;
+    padding-top: 4rem;
 }
 
 .talent {
     height: 80px;
     width: 80px;
+}
+
+.top-bar-button {
+    color: white !important;
+}
+
+.top-bar h1 {
+    max-width: calc(50% - 10rem);
 }

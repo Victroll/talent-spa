@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions';
 import Rodal from 'rodal';
 import FormIcon from '../components/formIcon';
-import { Colors, Link } from 'react-foundation';
 import 'rodal/lib/rodal.css';
+import Button from 'react-toolbox/lib/button/Button';
 
 class ModalTalent extends React.Component {
 
@@ -32,8 +32,8 @@ class ModalTalent extends React.Component {
                         </div>
                     </div>
                     <hr/>
-                    <Link onClick={ this.props.updateTalent }>Ok</Link>
-                    <Link color={Colors.SECONDARY} onClick={ this.props.closeModal }>Cancel</Link>
+                    <Button onClick={ this.props.updateTalent } label='Ok' raised />
+                    <Button onClick={ this.props.closeModal } label='Cancel' raised />
                 </form>
             </Rodal>               
         );

@@ -5,8 +5,8 @@ import ModalTalent from './modalTalent';
 import Talent from '../components/talent';
 import Draggable from 'gsap/Draggable';
 import * as Actions from '../actions';
-import { Button } from 'react-foundation';
 import ModalIcon from './modalIcon';
+import Button from 'react-toolbox/lib/button/Button';
 
 class TalentTree extends React.Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class TalentTree extends React.Component {
             <div className="talent-tree-container" 
             id={ TALENT_TREE_CONTAINER_ID }>
                 { talents }
-                <Button onClick={ this.addNewTalent }>+</Button>
+                <Button icon='add' onClick={ this.addNewTalent } raised/>
                 <ModalTalent />
                 <ModalIcon />
             </div>

@@ -4,7 +4,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import App from "./containers/app";
 import reducer from './reducers';
-import 'foundation-sites/dist/css/foundation.min.css';
 
 const store = createStore(reducer, {
     talents: {},
