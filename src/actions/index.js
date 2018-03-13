@@ -47,6 +47,7 @@ export function updateTalent(state) {
         desc: state.desc,
         hasPoints: state.hasPoints,
         initPoints: state.initPoints,
-        maxPoints: state.maxPoints
+        maxPoints: state.maxPoints,
+        triggersTalent: state.triggersTalent
     };
 }

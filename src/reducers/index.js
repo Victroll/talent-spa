@@ -18,7 +18,8 @@ export default function(state, action) {
                         initPoints: 0,
                         maxPoints: 1,
                         posX: 0,
-                        posY: 0
+                        posY: 0,
+                        triggersTalent: false
                     }
                 }
             };
@@ -32,7 +33,8 @@ export default function(state, action) {
                         initPoints: action.initPoints,
                         maxPoints: action.maxPoints,
                         posX: state.formIcon.posX,
-                        posY: state.formIcon.posY
+                        posY: state.formIcon.posY,
+                        triggersTalent: action.triggersTalent
                     }
                 },
                 modalTalent: {...state.modalTalent,

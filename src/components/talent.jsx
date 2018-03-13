@@ -15,6 +15,14 @@ class Talent extends React.Component {
         ctx.drawImage(img, 
             this.props.icon.posX * 128, 
             this.props.icon.posY * 128, 128, 128, 0, 0, 80, 80);
+
+        if (this.props.hasPoints) {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillRect(50, 60, 30, 20);
+            ctx.font = "15pt Roboto";
+            ctx.fillStyle = 'yellow';
+            ctx.fillText(this.props.initPoints + '/' + this.props.maxPoints, 50, 78);
+        }
     }
 
     componentDidUpdate() {
@@ -44,7 +52,11 @@ const mapStateToProps = function(store, ownProps) {
             posX: talentInfo.posX,
             posY: talentInfo.posY
         },
-        description: talentInfo.desc
+        description: talentInfo.desc,
+        hasPoints: talentInfo.hasPoints,
+        initPoints: talentInfo.initPoints,
+        maxPoints: talentInfo.maxPoints,
+        triggersTalent: talentInfo.triggersTalent
     }
 }
 

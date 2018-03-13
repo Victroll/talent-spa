@@ -1,8 +1,6 @@
 import React from 'react';
-import Rodal from 'rodal';
 import * as Actions from '../actions';
 import { connect } from 'react-redux';
-import 'rodal/lib/rodal.css';
 import Dialog from 'react-toolbox/lib/dialog/Dialog';
 
 class ModalIcon extends React.Component {
@@ -46,7 +44,8 @@ class ModalIcon extends React.Component {
     
     render() {
         return (
-            <Dialog className='modal' theme={{body: 'no-padding'}} active={ this.props.isOpen }>
+            <Dialog className='modal-icon' theme={{body: 'no-padding'}} 
+            active={ this.props.isOpen } onOverlayClick={ this.props.closeModal } >
                 <canvas id='iconModalCanvas' width="4140" height="2208"
                     onClick={ (e) => this.updateIconForm(e) }></canvas>
             </Dialog>

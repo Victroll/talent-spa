@@ -6,9 +6,22 @@
     text-align: center;
 }
 
+.talent-tree-background {
+    height: 600px;
+    width: 800px;
+    position: absolute;
+    left: calc(50% - 400px);
+}
+
 .modal {
     max-height: 75% !important;
     width: 600px !important;
+    overflow: auto !important;
+}
+
+.modal-icon {
+    max-height: 75% !important;
+    width: 800px !important;
     overflow: auto !important;
 }
 

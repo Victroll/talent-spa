@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as Actions from '../actions';
-import Rodal from 'rodal';
 import FormIcon from '../components/formIcon';
-import 'rodal/lib/rodal.css';
 import Dialog from 'react-toolbox/lib/dialog/Dialog';
 import Input from 'react-toolbox/lib/input/Input';
 import Checkbox from 'react-toolbox/lib/checkbox/Checkbox';
@@ -18,12 +16,14 @@ class ModalTalent extends React.Component {
             desc: this.props.desc,
             hasPoints: this.props.hasPoints,
             initPoints: this.props.initPoints,
-            maxPoints: this.props.maxPoints
+            maxPoints: this.props.maxPoints,
+            triggersTalent: this.props.triggersTalent
         };
 
         this.updateField = this.updateField.bind(this);
         this.updateTalent = this.updateTalent.bind(this);
         this.checkPoints = this.checkPoints.bind(this);
+        this.checkTrigger = this.checkTrigger.bind(this);
 
         this.actions = [
             { label: 'Save', onClick: this.updateTalent },
@@ -51,19 +51,28 @@ class ModalTalent extends React.Component {
         });
     }
 
+    checkTrigger() {
+        this.setState({...this.state,
+            triggersTalent: !this.state.triggersTalent
+        });
+    }
+
     componentWillReceiveProps(props) {
         this.setState({...this.state,
             name: props.name,
             desc: props.desc,
             hasPoints: props.hasPoints,
             initPoints: props.initPoints,
-            maxPoints: props.maxPoints
+            maxPoints: props.maxPoints,
+            triggersTalent: props.triggersTalent
         });
     }
 
     render() {
         return (
-            <Dialog className='modal' title='Talent configuration' actions={ this.actions } active={ this.props.isOpen }>
+            <Dialog className='modal' title='Talent configuration' 
+            actions={ this.actions } active={ this.props.isOpen }
+            onOverlayClick={ this.props.closeModal } >
                 <Row>
                     <Col xs={ 12 }>
                         <Input type='text' label='Name' value={ this.state.name } maxLength={ 12 } onChange={ (value) => this.updateField('name', value) } />
@@ -90,6 +99,7 @@ class ModalTalent extends React.Component {
                         </Col>
                     </Row>
                     : null }
+                <Checkbox checked={ this.state.triggersTalent } label={ 'Triggers another talent?' } onChange={ this.checkTrigger } />
             </Dialog>           
         );
     }
@@ -103,7 +113,8 @@ const mapStatsToProps = (store) => {
         desc: values ? values.desc : '',
         hasPoints: values ? values.hasPoints : false,
         initPoints: values ? values.initPoints : 0,
-        maxPoints: values ? values.maxPoints: 1
+        maxPoints: values ? values.maxPoints: 1,
+        triggersTalent: values ? values.triggersTalent : false
     };
 }
 
