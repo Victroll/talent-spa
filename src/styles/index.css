@@ -8,6 +8,7 @@
 
 .modal {
     max-height: 75% !important;
+    width: 600px !important;
     overflow: auto !important;
 }
 

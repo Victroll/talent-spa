@@ -2,6 +2,7 @@ import React from 'react';
 import TalentTree from './talentTree';
 import theme from '../toolbox/theme';
 import '../toolbox/theme.css';
+import '../flexboxgrid/react-flexbox-grid.css';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import TopBar from './topBar';
 

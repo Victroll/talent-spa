@@ -37,13 +37,14 @@ class Talent extends React.Component {
 }
 
 const mapStateToProps = function(store, ownProps) {
+    const talentInfo = store.talents[ownProps.id + 'Canvas'];
     return {
-        name: "New talent",
+        name: talentInfo.name,
         icon: {
-            posX: store.talents[ownProps.id + 'Canvas'].posX,
-            posY: store.talents[ownProps.id + 'Canvas'].posY
+            posX: talentInfo.posX,
+            posY: talentInfo.posY
         },
-        description: "Add description"
+        description: talentInfo.desc
     }
 }
 

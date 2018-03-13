@@ -12,6 +12,11 @@ export default function(state, action) {
                 talents: {...state.talents,
                     [action.talent.props.id + 'Canvas']: {
                         talent: action.talent,
+                        name: 'New talent',
+                        desc: 'Description',
+                        hasPoints: false,
+                        initPoints: 0,
+                        maxPoints: 1,
                         posX: 0,
                         posY: 0
                     }
@@ -21,6 +26,11 @@ export default function(state, action) {
             return {...state,
                 talents: {...state.talents,
                     [state.currentTalentId]: {...state.talents[state.currentTalentId],
+                        name: action.name,
+                        desc: action.desc,
+                        hasPoints: action.hasPoints,
+                        initPoints: action.initPoints,
+                        maxPoints: action.maxPoints,
                         posX: state.formIcon.posX,
                         posY: state.formIcon.posY
                     }

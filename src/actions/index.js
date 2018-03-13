@@ -40,8 +40,13 @@ export function updateFormICon(posX, posY) {
     };
 }
 
-export function updateTalent() {
+export function updateTalent(state) {
     return {
-        type: types.UPDATE_TALENT
+        type: types.UPDATE_TALENT,
+        name: state.name,
+        desc: state.desc,
+        hasPoints: state.hasPoints,
+        initPoints: state.initPoints,
+        maxPoints: state.maxPoints
     };
 }
