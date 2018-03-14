@@ -1,11 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../styles/index.css';
+import {TalentTooltip} from './tooltipped';
 
 class Talent extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            showTooltip: false
+        };
+
         this.showImage = this.showImage.bind(this);
+        this.showTooltip = this.showTooltip.bind(this);
+        this.hideTooltip = this.hideTooltip.bind(this);
     }
     
     showImage() {
@@ -28,17 +36,45 @@ class Talent extends React.Component {
     componentDidUpdate() {
         this.showImage();
     }
+
+    showTooltip() {
+        this.setState({...this.state, showTooltip: true});
+    }
+
+    hideTooltip() {
+        this.setState({...this.state, showTooltip: false});
+    }
     
     render() {
         return (
-            <div id={ this.props.id } className="talent" >
-                <canvas id={ this.props.id + 'Canvas' } 
+            <div id={ this.props.id } className="talent" 
+            style={ this.state.showTooltip ? {zIndex: '4'} : {} } >
+                <canvas id={ this.props.id + 'Canvas' }
+                onMouseOver={ this.showTooltip } 
+                onMouseOut={ this.hideTooltip }
+                style={{borderRadius: '2px'}}
                 height="80" 
                 width="80">
                     <img src="./images/icons/full.png" id={ this.props.id + 'Img' } 
                     onLoad={ this.showImage }
                     alt='' />
                 </canvas>
+                { this.state.showTooltip ? 
+                    <div className='talent-tooltip' >
+                        <div className='left-arrow'/>
+                        <strong>{ this.props.name }</strong>
+                        <hr/>
+                        Desc: { this.props.description }
+                        { this.props.hasPoints ? 
+                            <div>
+                            <hr/>
+                            Max. points: { this.props.maxPoints }
+                            </div>
+                            : null
+                        }
+                    </div>
+                    : null
+                }
             </div>
         );
     }

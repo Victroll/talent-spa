@@ -4,6 +4,7 @@
     padding-top: 4rem;
     padding-left: calc(50% - 400px);
     text-align: center;
+    z-index: 1;
 }
 
 .talent-tree-background {
@@ -28,6 +29,8 @@
 .talent {
     height: 80px;
     width: 80px;
+    position: relative;
+    z-index: 1;
 }
 
 .top-bar-button {
@@ -40,4 +43,29 @@
 
 .no-padding {
     padding: 0 !important;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.talent-tooltip {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    background: rgba(0, 0, 0, 0.75);
+    border-radius: 2px;
+    color: white;
+    width: 10rem;
+    animation: fade-in 0.5s;
+}
+
+.left-arrow {
+    position: absolute;
+    top: 4px;
+    left: -20px;
+    border: 10px solid;
+    border-color: transparent rgba(0, 0, 0, 0.75) transparent transparent;
+    z-index: inherit;
 }

@@ -83,10 +83,8 @@ class ModalTalent extends React.Component {
                         <Input type='text' multiline label='Description' value={ this.state.desc } onChange={ (value) => this.updateField('desc', value) } />
                     </Col>
                 </Row>
-                <Row>
-                    <Col xsOffset={ 5 } xs={ 1 } >
+                <Row center='xs'>
                         <FormIcon />
-                    </Col>
                 </Row>
                 <Checkbox checked={ this.state.hasPoints } label={ 'Has points?' } onChange={ this.checkPoints } />
                 { this.state.hasPoints ?

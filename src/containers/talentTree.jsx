@@ -25,6 +25,7 @@ class TalentTree extends React.Component {
 
         Draggable.create(".talent",
         {
+            zIndexBoost: false,
             type: "x,y",
             edgeResistance: 0.65,
             bounds: "#talent-tree-container",
