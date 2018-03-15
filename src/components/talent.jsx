@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import '../styles/index.css';
-import {TalentTooltip} from './tooltipped';
+import { TalentTooltip } from './tooltipped';
 
 class Talent extends React.Component {
     constructor(props) {
@@ -59,20 +59,12 @@ class Talent extends React.Component {
                     onLoad={ this.showImage }
                     alt='' />
                 </canvas>
-                { this.state.showTooltip ? 
-                    <div className='talent-tooltip' >
-                        <div className='left-arrow'/>
-                        <strong>{ this.props.name }</strong>
-                        <hr/>
-                        Desc: { this.props.description }
-                        { this.props.hasPoints ? 
-                            <div>
-                            <hr/>
-                            Max. points: { this.props.maxPoints }
-                            </div>
-                            : null
-                        }
-                    </div>
+                { true ? 
+                    <TalentTooltip 
+                    title={ this.props.name }
+                    desc={ this.props.description }
+                    hasPoints={ this.props.hasPoints }
+                    maxPoints={ this.props.maxPoints } />
                     : null
                 }
             </div>

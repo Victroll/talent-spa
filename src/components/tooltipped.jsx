@@ -1,33 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Tooltip from 'react-toolbox/lib/tooltip';
 
-const TalentTooltip = ({children, talentInfo}) => {
-    const TooltippedComponent = Tooltip(({desc, hasPoints, initPoints, maxPoints, children, props}) =>
-        
-        <div {...props}>
-        {children}
-            <hr/>
-            <strong>Description</strong>
-            <br/>
-            { desc }
-        </div>
-    );
-
-    
-
-    return (
-        <TooltippedComponent
-        children={ children }
-        talentInfo={ talentInfo }
-        tooltip={ talentInfo.name }
-        />
-    );
+class TalentTooltip extends React.Component {
+    render() {
+        return(
+            <div className='talent-tooltip' >
+                <div className='left-arrow' />
+                <strong>{ this.props.title }</strong>
+                <hr/>
+                { this.props.desc }
+                { this.props.hasPoints ?
+                    <div>
+                        <hr/>
+                        Max. points: { this.props.maxPoints }
+                    </div>
+                    : null
+                }
+            </div>
+        );
+    }
 }
 
 TalentTooltip.propTypes = {
-    children:   PropTypes.any.isRequired,
-    talentInfo: PropTypes.object.isRequired
+    title:      PropTypes.string.isRequired,
+    desc:       PropTypes.string.isRequired,
+    hasPoints:  PropTypes.bool.isRequired,
+    maxPoints:  PropTypes.number
 }
 
-export {TalentTooltip};
+export { TalentTooltip };
