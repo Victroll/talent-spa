@@ -26,8 +26,8 @@ class ModalTalent extends React.Component {
         this.checkTrigger = this.checkTrigger.bind(this);
 
         this.actions = [
-            { label: 'Save', onClick: this.updateTalent },
-            { label: 'Cancel', onClick: this.props.closeModal }
+            { label: 'Save', id: 'save-talent', onClick: this.updateTalent },
+            { label: 'Cancel', id: 'cancel-talent', onClick: this.props.closeModal }
         ];
     }
 
@@ -75,25 +75,25 @@ class ModalTalent extends React.Component {
             onOverlayClick={ this.props.closeModal } >
                 <Row>
                     <Col xs={ 12 }>
-                        <Input type='text' label='Name' value={ this.state.name } maxLength={ 12 } onChange={ (value) => this.updateField('name', value) } />
+                        <Input id='talent-name' type='text' label='Name' value={ this.state.name } maxLength={ 12 } onChange={ (value) => this.updateField('name', value) } />
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={ 12 }>
-                        <Input type='text' multiline label='Description' value={ this.state.desc } onChange={ (value) => this.updateField('desc', value) } />
+                        <Input id='talent-desc' type='text' multiline label='Description' value={ this.state.desc } onChange={ (value) => this.updateField('desc', value) } />
                     </Col>
                 </Row>
                 <Row center='xs'>
                         <FormIcon />
                 </Row>
-                <Checkbox checked={ this.state.hasPoints } label={ 'Has points?' } onChange={ this.checkPoints } />
+                <Checkbox className='talent-hasPoints' checked={ this.state.hasPoints } label={ 'Has points?' } onChange={ this.checkPoints } />
                 { this.state.hasPoints ?
                     <Row>
                         <Col xs={ 2 }>
-                            <Input type='number' label='Initial points' value={ this.state.initPoints } onChange={(value) => this.updateField('initPoints', value)} />
+                            <Input id='talent-initial-points' type='number' label='Initial points' value={ this.state.initPoints } onChange={(value) => this.updateField('initPoints', value)} />
                         </Col>
                         <Col xs={ 2 }>
-                            <Input type='number' label='Max. points' value={ this.state.maxPoints } onChange={(value) => this.updateField('maxPoints', value)} />
+                            <Input id='talent-max-points' type='number' label='Max. points' value={ this.state.maxPoints } onChange={(value) => this.updateField('maxPoints', value)} />
                         </Col>
                     </Row>
                     : null }

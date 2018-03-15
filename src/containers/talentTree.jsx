@@ -62,7 +62,7 @@ class TalentTree extends React.Component {
         return (
             <div className="talent-tree-container" 
             id={ TALENT_TREE_CONTAINER_ID }>
-                <Button icon='add' onClick={ this.addNewTalent } raised/>
+                <Button id='add-talent' icon='add' onClick={ this.addNewTalent } raised/>
                 <hr />
                 <canvas id={ 'talent-tree-background' }
                 className='talent-tree-background' ></canvas>

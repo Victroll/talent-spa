@@ -59,7 +59,8 @@ class Talent extends React.Component {
                     onLoad={ this.showImage }
                     alt='' />
                 </canvas>
-                { true ? 
+                {/* { true ?  */}
+                { this.state.showTooltip ?
                     <TalentTooltip 
                     title={ this.props.name }
                     desc={ this.props.description }
