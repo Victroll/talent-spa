@@ -6,6 +6,7 @@ import Dialog from 'react-toolbox/lib/dialog/Dialog';
 import Input from 'react-toolbox/lib/input/Input';
 import Checkbox from 'react-toolbox/lib/checkbox/Checkbox';
 import { Row, Col} from 'react-flexbox-grid';
+import TalentList from './talentList';
 
 class ModalTalent extends React.Component {
     constructor(props) {
@@ -29,6 +30,10 @@ class ModalTalent extends React.Component {
             { label: 'Save', id: 'save-talent', onClick: this.updateTalent },
             { label: 'Cancel', id: 'cancel-talent', onClick: this.props.closeModal }
         ];
+    }
+
+    shouldComponentUpdate() {
+        return this.props.isOpen;
     }
 
     updateTalent() {
@@ -97,7 +102,14 @@ class ModalTalent extends React.Component {
                         </Col>
                     </Row>
                     : null }
-                <Checkbox checked={ this.state.triggersTalent } label={ 'Triggers another talent?' } onChange={ this.checkTrigger } />
+                <Checkbox checked={ this.state.triggersTalent } label='Triggers another talent?' onChange={ this.checkTrigger } />
+                { this.state.triggersTalent ? 
+                    <Row>
+                        <Col xs={ 5 }>
+                            <TalentList talents={ this.props.otherTalents } />
+                        </Col>
+                    </Row>
+                    : null}
             </Dialog>           
         );
     }
@@ -105,6 +117,12 @@ class ModalTalent extends React.Component {
 
 const mapStatsToProps = (store) => {
     const values = store.talents[store.currentTalentId];
+    const otherTalents = [];
+
+    for (let key in store.talents)
+        if (key !== store.currentTalentId)
+            otherTalents.push(store.talents[key]);
+
     return {
         isOpen: store.modalTalent.isOpen,
         name: values ? values.name : '',
@@ -112,7 +130,8 @@ const mapStatsToProps = (store) => {
         hasPoints: values ? values.hasPoints : false,
         initPoints: values ? values.initPoints : 0,
         maxPoints: values ? values.maxPoints: 1,
-        triggersTalent: values ? values.triggersTalent : false
+        triggersTalent: values ? values.triggersTalent : false,
+        otherTalents: otherTalents
     };
 }
 
