@@ -8,15 +8,23 @@ import reducer from './reducers';
 const store = createStore(reducer, {
     talents: {},
     modalTalent: {
-        isOpen: false
+        isOpen: false,
+        trigger: new Set()
     },
     modalIcon: {
+        isOpen: false
+    },
+    modalSettings: {
         isOpen: false
     },
     formIcon: {
         posX: 0,
         posY:0
-    }
+    },
+    talentTreeSettings: {
+        triggerValue: 'max'
+    },
+    editMode: true
 });
 
 ReactDOM.render(

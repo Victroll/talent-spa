@@ -32,10 +32,6 @@ class ModalTalent extends React.Component {
         ];
     }
 
-    shouldComponentUpdate() {
-        return this.props.isOpen;
-    }
-
     updateTalent() {
         this.props.updateTalent(this.state);
     }
@@ -63,14 +59,21 @@ class ModalTalent extends React.Component {
     }
 
     componentWillReceiveProps(props) {
-        this.setState({...this.state,
-            name: props.name,
-            desc: props.desc,
-            hasPoints: props.hasPoints,
-            initPoints: props.initPoints,
-            maxPoints: props.maxPoints,
-            triggersTalent: props.triggersTalent
-        });
+        if (props.isOpen && !this.props.isOpen)
+            this.setState({...this.state,
+                name: props.name,
+                desc: props.desc,
+                hasPoints: props.hasPoints,
+                initPoints: props.initPoints,
+                maxPoints: props.maxPoints,
+                triggersTalent: props.triggersTalent
+            });
+        else
+            this.setState({...this.state,
+                name: props.name,
+                desc: props.desc,
+                triggersTalent: props.triggersTalent
+            });
     }
 
     render() {
@@ -102,11 +105,15 @@ class ModalTalent extends React.Component {
                         </Col>
                     </Row>
                     : null }
+                { this.props.otherTalents.length ?  
                 <Checkbox checked={ this.state.triggersTalent } label='Triggers another talent?' onChange={ this.checkTrigger } />
+                : null}
                 { this.state.triggersTalent ? 
                     <Row>
                         <Col xs={ 5 }>
-                            <TalentList talents={ this.props.otherTalents } />
+                            <TalentList 
+                            talents={ this.props.otherTalents }
+                            preselected={ this.props.trigger } />
                         </Col>
                     </Row>
                     : null}
@@ -131,6 +138,7 @@ const mapStatsToProps = (store) => {
         initPoints: values ? values.initPoints : 0,
         maxPoints: values ? values.maxPoints: 1,
         triggersTalent: values ? values.triggersTalent : false,
+        trigger: values ? store.modalTalent.trigger : new Set(),
         otherTalents: otherTalents
     };
 }

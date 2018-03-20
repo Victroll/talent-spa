@@ -29,7 +29,16 @@ class Talent extends React.Component {
             ctx.fillRect(50, 60, 30, 20);
             ctx.font = "15pt Roboto";
             ctx.fillStyle = 'yellow';
-            ctx.fillText(this.props.initPoints + '/' + this.props.maxPoints, 50, 78);
+            ctx.fillText(this.props.currentPoints + '/' + this.props.maxPoints, 50, 78);
+        }
+
+        // BUCLE INFINITO!!! Lo que hace esta función se tiene que hacer
+        // al darle al play (poner a disable todos los que toque).
+        // Al incrementar o decrementar los puntos de un talento,
+        // se volverá a hacer la comprobación
+        if (!this.props.editMode && this.props.disabled) {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
+            ctx.fillRect(0, 0, 80, 80);
         }
     }
 
@@ -59,7 +68,6 @@ class Talent extends React.Component {
                     onLoad={ this.showImage }
                     alt='' />
                 </canvas>
-                {/* { true ?  */}
                 { this.state.showTooltip ?
                     <TalentTooltip 
                     title={ this.props.name }
@@ -84,8 +92,11 @@ const mapStateToProps = function(store, ownProps) {
         description: talentInfo.desc,
         hasPoints: talentInfo.hasPoints,
         initPoints: talentInfo.initPoints,
+        currentPoints: talentInfo.currentPoints,
         maxPoints: talentInfo.maxPoints,
-        triggersTalent: talentInfo.triggersTalent
+        triggersTalent: talentInfo.triggersTalent,
+        disabled: talentInfo.disabled,
+        editMode: store.editMode
     }
 }
 

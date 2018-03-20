@@ -25,7 +25,7 @@ TalentTooltip.propTypes = {
     title:      PropTypes.string.isRequired,
     desc:       PropTypes.string.isRequired,
     hasPoints:  PropTypes.bool.isRequired,
-    maxPoints:  PropTypes.number
+    maxPoints:  PropTypes.any
 }
 
 export { TalentTooltip };
