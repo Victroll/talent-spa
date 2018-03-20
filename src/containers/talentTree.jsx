@@ -17,10 +17,14 @@ class TalentTree extends React.Component {
         this.addNewTalent = this.addNewTalent.bind(this);
         this.openModalTalent = this.openModalTalent.bind(this);
         this.openModalSettings = this.openModalSettings.bind(this);
-        this.openModalInfo = this.openModalInfo.bind(this);
         this.changeMode = this.changeMode.bind(this);
         this.increaseTalentPoints = this.increaseTalentPoints.bind(this);
         this.decreaseTalentPoints = this.decreaseTalentPoints.bind(this);
+        this.removeTalent = this.removeTalent.bind(this);
+
+        this.state = {
+            isRemoving: false
+        };
     }
 
     openModalTalent(id) {
@@ -47,7 +51,12 @@ class TalentTree extends React.Component {
                 }
             },
             onClick: (event) => {
-                if (that.props.editMode && event.button === 0)
+                if (that.props.editMode && that.state.isRemoving && event.button === 0) {
+                    that.props.removeTalent(event.target.id);
+                    that.setState({...that.state,
+                        isRemoving: false
+                    });
+                } else if (that.props.editMode && event.button === 0)
                     that.openModalTalent(event.target.id)
                 else if (!that.props.editMode && event.button === 0)
                     that.increaseTalentPoints(event.target.id);
@@ -77,10 +86,6 @@ class TalentTree extends React.Component {
         this.props.openModalSettings();
     }
 
-    openModalInfo() {
-
-    }
-
     changeMode() {
         if (this.props.editMode) {
             this.props.activePlayMode();
@@ -89,6 +94,12 @@ class TalentTree extends React.Component {
             this.props.activeEditMode();
             if (this.draggable) this.draggable.forEach((current) => current.enable());
         }
+    }
+
+    removeTalent() {
+        this.setState({...this.state,
+            isRemoving: true
+        });
     }
 
     render() {
@@ -103,13 +114,13 @@ class TalentTree extends React.Component {
             id={ TALENT_TREE_CONTAINER_ID }>
                 <Row>
                     <Col xs={ 3 }>
-                        <Button id='info-talents' icon='info_outline' onClick={ this.openModalInfo } raised />
+                        <Button id='config-talents' icon='settings' onClick={ this.openModalSettings } raised />
                     </Col>
                     <Col xs={ 3 }>
                         <Button id='add-talent' icon='add' onClick={ this.addNewTalent } raised />
                     </Col>
                     <Col xs={ 3 }>
-                        <Button id='config-talents' icon='settings' onClick={ this.openModalSettings } raised />
+                        <Button id='remove-talent' icon='remove' onClick={ this.removeTalent } raised />
                     </Col>
                     <Col xs={ 3 }>
                         <Button id='play-talents' 
@@ -147,7 +158,8 @@ const mapDispatchToProps = (dispatch) => {
         activeEditMode: () => dispatch(Actions.activeEditMode()),
         activePlayMode: () => dispatch(Actions.activePlayMode()),
         increaseTalentPoints: (id) => dispatch(Actions.increaseTalentPoints(id)),
-        decreaseTalentPoints: (id) => dispatch(Actions.decreaseTalentPoints(id))
+        decreaseTalentPoints: (id) => dispatch(Actions.decreaseTalentPoints(id)),
+        removeTalent: (id) => dispatch(Actions.removeTalent(id))
     }
 }
 

@@ -104,3 +104,10 @@ export function decreaseTalentPoints(id) {
         id: id
     };
 }
+
+export function removeTalent(id) {
+    return {
+        type: types.REMOVE_TALENT,
+        id: id
+    };
+}

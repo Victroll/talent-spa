@@ -245,6 +245,24 @@ export default function(state, action) {
             }
 
             return canDecrease ? newState : state;
+        case types.REMOVE_TALENT:
+            newState = {...state};
+            delete newState.talents[action.id];
+            
+            talents = Object.keys(newState.talents);
+            talents.forEach((current) => {
+                let i = newState.talents[current].triggers.indexOf(action.id.split('Canvas')[0]);
+                if (i > -1) {
+                    newState.talents[current].triggers.splice(i, 1);
+                    if (newState.talents[current].triggers.length === 0)
+                        newState.talents[current].triggersTalent = false;
+                }
+                
+                if (newState.talents[current].triggerBy.has(action.id))
+                    newState.talents[current].triggerBy.delete(action.id);
+            });
+
+            return newState;
         default:
             return state;
     }

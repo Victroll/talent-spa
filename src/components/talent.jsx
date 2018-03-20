@@ -53,6 +53,10 @@ class Talent extends React.Component {
     hideTooltip() {
         this.setState({...this.state, showTooltip: false});
     }
+
+    shouldComponentUpdate(nextProps) {
+        return nextProps.name !== undefined;
+    }
     
     render() {
         return (
@@ -83,6 +87,8 @@ class Talent extends React.Component {
 
 const mapStateToProps = function(store, ownProps) {
     const talentInfo = store.talents[ownProps.id + 'Canvas'];
+    // When this talent has been removed
+    if (talentInfo === undefined) return {};
     return {
         name: talentInfo.name,
         icon: {

@@ -10,7 +10,7 @@ class TopBar extends React.Component {
                 <Navigation type='horizontal'>
                     <Button className='top-bar-button' label='Home' icon='home' />
                     <Button className='top-bar-button' label='Create' icon='create'/>
-                    <Button className='top-bar-button' label='Load' icon='file_upload'/>
+                    <Button className='top-bar-button' label='Load' icon='file_upload' />
                 </Navigation>
             </AppBar>
         );
