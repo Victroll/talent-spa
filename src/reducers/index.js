@@ -176,6 +176,8 @@ export default function(state, action) {
                 editMode: false
             };
         case types.INCREASE_TALENT_POINTS:
+            if (state.talents[action.id].disabled) return state;
+
             newState = {...state,
                 talents: {...state.talents,
                     [action.id]: {...state.talents[action.id],
@@ -193,14 +195,21 @@ export default function(state, action) {
                 if (newState.talents[action.id].currentPoints === 
                     newState.talents[action.id].maxPoints) { // Enable talents
                         triggers.forEach((current) => {
-                            newState.talents[current + 'Canvas'].disabled = false;
+                            // Check all the talents tha trigger this one
+                            newState.talents[current + 'Canvas'].disabled = ![...newState.talents[current + 'Canvas'].triggerBy].reduce(
+                                (l, t) =>  l && (newState.talents[t].currentPoints ===
+                                                newState.talents[t].maxPoints),
+                            true);
                         });
                     }
             } else {
                 if (newState.talents[action.id].currentPoints > 
                     newState.talents[action.id].initPoints) { // Enable talents
                         triggers.forEach((current) => {
-                            newState.talents[current + 'Canvas'].disabled = false;
+                            newState.talents[current + 'Canvas'].disabled = ![...newState.talents[current + 'Canvas'].triggerBy].reduce(
+                                (l, t) =>  l && (newState.talents[t].currentPoints >
+                                                newState.talents[t].initPoints),
+                            true);
                         });
                 }
             }

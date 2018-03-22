@@ -2,7 +2,7 @@ describe('Basic talent tree creation', function() {
     it('Creates and fill 1 talent', function() {
         const Talent1Desc = 'Talent 1 description. This is a test for the description of the talent 1.'
         // Open app
-        cy.visit('http://localhost:3001/');
+        cy.visit('http://localhost:3000/');
 
         // Add new talent
         cy.get('#add-talent').click();
