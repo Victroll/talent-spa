@@ -114,13 +114,13 @@ class TalentTree extends React.Component {
             id={ TALENT_TREE_CONTAINER_ID }>
                 <Row>
                     <Col xs={ 3 }>
-                        <Button id='config-talents' icon='settings' onClick={ this.openModalSettings } raised />
+                        <Button id='config-talents' icon='settings' onClick={ this.openModalSettings } raised disabled={ !this.props.editMode }/>
                     </Col>
                     <Col xs={ 3 }>
-                        <Button id='add-talent' icon='add' onClick={ this.addNewTalent } raised />
+                        <Button id='add-talent' icon='add' onClick={ this.addNewTalent } raised disabled={ !this.props.editMode } />
                     </Col>
                     <Col xs={ 3 }>
-                        <Button id='remove-talent' icon='remove' onClick={ this.removeTalent } raised />
+                        <Button id='remove-talent' icon='remove' onClick={ this.removeTalent } raised disabled={ !this.props.editMode } />
                     </Col>
                     <Col xs={ 3 }>
                         <Button id='play-talents' 
