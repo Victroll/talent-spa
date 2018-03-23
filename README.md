@@ -12,3 +12,12 @@ Once you have downloaded the project, just run `npm install` to install all de d
 In order to run this project and test it, you only have to run the command `npm start`. Once everything is compiled and loaded, you will be able of play it in te URL `localhost:3000` by default.
 ## Tests
 Although basic testing is included in the project, there is a lot of work to do about this. FYI, the framework used to do the testing is [Cypress](https://www.cypress.io/).
+### Future
+The planning for the following weeks is:
+* Create the Home page
+* Create a tutorial (or similar)
+* Add few elements (footer, github link, etc)
+* Save and load talent trees (on the fly)
+* Add back-end for store and load talent trees
+* Add templates
+* Add arrows
