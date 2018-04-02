@@ -32,10 +32,6 @@ class Talent extends React.Component {
             ctx.fillText(this.props.currentPoints + '/' + this.props.maxPoints, 50, 78);
         }
 
-        // BUCLE INFINITO!!! Lo que hace esta función se tiene que hacer
-        // al darle al play (poner a disable todos los que toque).
-        // Al incrementar o decrementar los puntos de un talento,
-        // se volverá a hacer la comprobación
         if (!this.props.editMode && this.props.disabled) {
             ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
             ctx.fillRect(0, 0, 80, 80);

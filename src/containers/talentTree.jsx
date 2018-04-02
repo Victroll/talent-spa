@@ -21,6 +21,8 @@ class TalentTree extends React.Component {
         this.increaseTalentPoints = this.increaseTalentPoints.bind(this);
         this.decreaseTalentPoints = this.decreaseTalentPoints.bind(this);
         this.removeTalent = this.removeTalent.bind(this);
+        this.saveTalents = this.saveTalents.bind(this);
+        this.loadTalents = this.loadTalents.bind(this);
 
         this.state = {
             isRemoving: false
@@ -102,6 +104,14 @@ class TalentTree extends React.Component {
         });
     }
 
+    saveTalents() {
+        this.props.saveTalents();
+    }
+
+    loadTalents() {
+
+    }
+
     render() {
         const { talentsObj } = this.props;
         const talents = [];
@@ -113,16 +123,22 @@ class TalentTree extends React.Component {
             <div className="talent-tree-container" 
             id={ TALENT_TREE_CONTAINER_ID }>
                 <Row>
-                    <Col xs={ 3 }>
+                    <Col xs={ 2 }>
                         <Button id='config-talents' icon='settings' onClick={ this.openModalSettings } raised disabled={ !this.props.editMode }/>
                     </Col>
-                    <Col xs={ 3 }>
+                    <Col xs={ 2 }>
+                        <Button id='save-talents' icon='save' onClick={ this.saveTalents } raised disabled={ !this.props.editMode }/>
+                    </Col>
+                    <Col xs={ 2 }>
+                        <Button id='load-talents' icon='cloud_upload' onClick={ this.loadTalents } raised disabled={ !this.props.editMode }/>
+                    </Col>
+                    <Col xs={ 2 }>
                         <Button id='add-talent' icon='add' onClick={ this.addNewTalent } raised disabled={ !this.props.editMode } />
                     </Col>
-                    <Col xs={ 3 }>
+                    <Col xs={ 2 }>
                         <Button id='remove-talent' icon='remove' onClick={ this.removeTalent } raised disabled={ !this.props.editMode } />
                     </Col>
-                    <Col xs={ 3 }>
+                    <Col xs={ 2 }>
                         <Button id='play-talents' 
                         icon={ this.props.editMode ? 'play_arrow' : 'mode_edit'} raised onClick={ this.changeMode } />
                     </Col>
@@ -159,7 +175,8 @@ const mapDispatchToProps = (dispatch) => {
         activePlayMode: () => dispatch(Actions.activePlayMode()),
         increaseTalentPoints: (id) => dispatch(Actions.increaseTalentPoints(id)),
         decreaseTalentPoints: (id) => dispatch(Actions.decreaseTalentPoints(id)),
-        removeTalent: (id) => dispatch(Actions.removeTalent(id))
+        removeTalent: (id) => dispatch(Actions.removeTalent(id)),
+        saveTalents: () => dispatch(Actions.saveTalents())
     }
 }
 

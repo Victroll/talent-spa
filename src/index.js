@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import App from "./containers/app";
 import reducer from './reducers';
+import watchServerActions from './reducers/sagas';
+import createSagaMiddleware from 'redux-saga';
 
-const store = createStore(reducer, {
+const sagaMiddleware = createSagaMiddleware();
+
+const store = createStore(
+    reducer,
+    {
     talents: {},
     modalTalent: {
         isOpen: false,
@@ -25,7 +31,9 @@ const store = createStore(reducer, {
         triggerValue: 'max'
     },
     editMode: true
-});
+},applyMiddleware(sagaMiddleware),);
+
+sagaMiddleware.run(watchServerActions);
 
 ReactDOM.render(
     <Provider store={ store }>

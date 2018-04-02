@@ -111,3 +111,9 @@ export function removeTalent(id) {
         id: id
     };
 }
+
+export function saveTalents() {
+    return {
+        type: types.SAVE_TALENTS
+    };
+}
