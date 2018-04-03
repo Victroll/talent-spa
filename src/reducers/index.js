@@ -26,7 +26,8 @@ export default function(state, action) {
                         triggersTalent: false,
                         triggers: [],
                         triggerBy: new Set(),
-                        disabled: false
+                        disabled: false,
+                        transform: 'translate3d(0px, 0px, 0px)'
                     }
                 }
             };
@@ -94,6 +95,18 @@ export default function(state, action) {
                     isOpen: false
                 }
             };
+        case types.OPEN_MODAL_SAVE:
+            return {...state,
+                modalSave: {...state.modalSave,
+                    isOpen: true
+                }
+            };
+        case types.CLOSE_MODAL_SAVE:
+            return {...state,
+                modalSave: {...state.modalSave,
+                    isOpen: false
+                }
+            };
         case types.UPDATE_FORM_ICON:
             return {...state,
                 formIcon: {...state.formIcon,
@@ -127,6 +140,56 @@ export default function(state, action) {
                     }
                 };
             }
+        case types.OPEN_MODAL_LIST:
+            return {...state,
+                modalList: {...state.modalList,
+                    isOpen: true
+                }
+            };
+        case types.CLOSE_MODAL_LIST:
+            return {...state,
+                modalList: {...state.modalList,
+                    isOpen: false
+                }
+            };
+        case types.LOAD_TALENT_TREE_LIST:
+            return {...state,
+                modalList: {...state.modalList,
+                    treeList: action.list
+                },
+                isLoading: true
+            };
+        case types.SHOW_LOADED_TALENT_TREE:
+            return {...state,
+                modalList: {...state.modalList,
+                    isOpen: false
+                },
+                talents: {},
+                talentsToShow: action.talentTree,
+                isLoading: false
+            };
+        case types.ADD_LOADED_TALENT:
+            var talentInfo = state.talentsToShow[action.index];
+            return {...state,
+                talents: {...state.talents,
+                    [action.talent.props.id + 'Canvas']: {
+                        talent: action.talent,
+                        name: talentInfo.name,
+                        desc: talentInfo.desc,
+                        hasPoints: talentInfo.hasPoints,
+                        initPoints: talentInfo.initPoints,
+                        currentPoints: talentInfo.currentPoints,
+                        maxPoints: talentInfo.maxPoints,
+                        posX: talentInfo.posX,
+                        posY: talentInfo.posY,
+                        triggersTalent: talentInfo.triggersTalent,
+                        triggers: talentInfo.triggers,
+                        triggerBy: new Set(talentInfo.triggerBy),
+                        disabled: talentInfo.disabled,
+                        transform: talentInfo.transform
+                    }
+                }
+            };
         case types.OPEN_MODAL_SETTINGS:
             return {...state,
                 modalSettings: {...state.modalSettings,

@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { TALENT_TREE_CONTAINER_ID } from '../constants/names';
 import ModalTalent from './modalTalent';
 import ModalSettings from './modalSettings';
+import ModalList from './modalList';
+import ModalSave from './modalSave';
 import Talent from '../components/talent';
 import Draggable from 'gsap/Draggable';
 import * as Actions from '../actions';
@@ -21,7 +23,7 @@ class TalentTree extends React.Component {
         this.increaseTalentPoints = this.increaseTalentPoints.bind(this);
         this.decreaseTalentPoints = this.decreaseTalentPoints.bind(this);
         this.removeTalent = this.removeTalent.bind(this);
-        this.saveTalents = this.saveTalents.bind(this);
+        this.openModalSave = this.openModalSave.bind(this);
         this.loadTalents = this.loadTalents.bind(this);
 
         this.state = {
@@ -33,8 +35,26 @@ class TalentTree extends React.Component {
         this.props.openModalTalent(id);
     }
 
-    componentDidUpdate() {
+    addNewTalent() {
+        let id = 'talent' + Object.keys(this.props.talentsObj).length;
+        this.props.addNewTalent(
+            <Talent id={ id }
+            key={ "talent" + Object.keys(this.props.talentsObj).length } />
+        );
+    }
+
+    componentDidUpdate(prevProps) {
         const that = this;
+
+        if (prevProps.isLoading && !this.props.isLoading) {
+            this.props.talentsToShow.forEach((talent, index) => {
+                this.props.addLoadedTalent(
+                    <Talent id={ talent.id.split('Canvas')[0] }
+                    key={ talent.id.split('Canvas')[0] } />,
+                    index
+                );
+            });
+        }
 
         this.draggable = Draggable.create(".talent",
         {
@@ -76,14 +96,6 @@ class TalentTree extends React.Component {
         this.props.decreaseTalentPoints(id);
     }
 
-    addNewTalent() {
-        let id = 'talent' + Object.keys(this.props.talentsObj).length;
-        this.props.addNewTalent(
-            <Talent id={ id }
-            key={ "talent" + Object.keys(this.props.talentsObj).length } />
-        );
-    }
-
     openModalSettings() {
         this.props.openModalSettings();
     }
@@ -104,12 +116,12 @@ class TalentTree extends React.Component {
         });
     }
 
-    saveTalents() {
-        this.props.saveTalents();
+    openModalSave() {
+        this.props.openModalSave();
     }
 
     loadTalents() {
-
+        this.props.openModalList();
     }
 
     render() {
@@ -127,10 +139,10 @@ class TalentTree extends React.Component {
                         <Button id='config-talents' icon='settings' onClick={ this.openModalSettings } raised disabled={ !this.props.editMode }/>
                     </Col>
                     <Col xs={ 2 }>
-                        <Button id='save-talents' icon='save' onClick={ this.saveTalents } raised disabled={ !this.props.editMode }/>
+                        <Button id='save-talents' icon='save' onClick={ this.openModalSave } raised disabled={ !this.props.editMode }/>
                     </Col>
                     <Col xs={ 2 }>
-                        <Button id='load-talents' icon='cloud_upload' onClick={ this.loadTalents } raised disabled={ !this.props.editMode }/>
+                        <Button id='load-talents' icon='cloud_download' onClick={ this.loadTalents } raised disabled={ !this.props.editMode }/>
                     </Col>
                     <Col xs={ 2 }>
                         <Button id='add-talent' icon='add' onClick={ this.addNewTalent } raised disabled={ !this.props.editMode } />
@@ -154,6 +166,8 @@ class TalentTree extends React.Component {
                 <ModalTalent />
                 <ModalIcon />
                 <ModalSettings />
+                <ModalList />
+                <ModalSave />
             </div>
         );
     }
@@ -162,7 +176,9 @@ class TalentTree extends React.Component {
 const mapStateToProps = (store) => {
     return {
         talentsObj: store.talents,
-        editMode: store.editMode
+        editMode: store.editMode,
+        talentsToShow: store.talentsToShow,
+        isLoading: store.isLoading
     };
 }
 
@@ -171,12 +187,14 @@ const mapDispatchToProps = (dispatch) => {
         addNewTalent: (talent) => dispatch(Actions.addNewTalent(talent)),
         openModalTalent: (id) => dispatch(Actions.openModalTalent(id)),
         openModalSettings: () => dispatch(Actions.openModalSettings()),
+        openModalList: () => dispatch(Actions.openModalList()),
+        openModalSave: () => dispatch(Actions.openModalSave()),
         activeEditMode: () => dispatch(Actions.activeEditMode()),
         activePlayMode: () => dispatch(Actions.activePlayMode()),
         increaseTalentPoints: (id) => dispatch(Actions.increaseTalentPoints(id)),
         decreaseTalentPoints: (id) => dispatch(Actions.decreaseTalentPoints(id)),
         removeTalent: (id) => dispatch(Actions.removeTalent(id)),
-        saveTalents: () => dispatch(Actions.saveTalents())
+        addLoadedTalent: (talent, index) => dispatch(Actions.addLoadedTalent(talent, index))
     }
 }
 

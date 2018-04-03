@@ -53,6 +53,11 @@ class Talent extends React.Component {
     shouldComponentUpdate(nextProps) {
         return nextProps.name !== undefined;
     }
+
+    componentDidMount() {
+        var element = document.getElementById(this.props.id);
+        element.style.transform = this.props.transform;
+    }
     
     render() {
         return (
@@ -98,7 +103,8 @@ const mapStateToProps = function(store, ownProps) {
         maxPoints: talentInfo.maxPoints,
         triggersTalent: talentInfo.triggersTalent,
         disabled: talentInfo.disabled,
-        editMode: store.editMode
+        editMode: store.editMode,
+        transform: talentInfo.transform
     }
 }
 

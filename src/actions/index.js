@@ -112,8 +112,68 @@ export function removeTalent(id) {
     };
 }
 
-export function saveTalents() {
+export function saveTalents(name) {
     return {
-        type: types.SAVE_TALENTS
+        type: types.SAVE_TALENTS,
+        name: name
+    };
+}
+
+export function openModalList() {
+    return {
+        type: types.OPEN_MODAL_LIST
+    };
+}
+
+export function closeModalList() {
+    return {
+        type: types.CLOSE_MODAL_LIST
+    };
+}
+
+export function fetchTalentTreeList() {
+    return {
+        type: types.FETCH_TALENT_TREE_LIST
+    };
+}
+
+export function loadTalentTreeList(list) {
+    return {
+        type: types.LOAD_TALENT_TREE_LIST,
+        list: list
+    };
+}
+
+export function loadTalentTree(name) {
+    return {
+        type: types.LOAD_TALENT_TREE,
+        name: name
+    };
+}
+
+export function showLoadedTalentTree(talentTree) {
+    return {
+        type: types.SHOW_LOADED_TALENT_TREE,
+        talentTree: talentTree
+    };
+}
+
+export function addLoadedTalent(talent, index) {
+    return {
+        type: types.ADD_LOADED_TALENT,
+        talent: talent,
+        index: index
+    };
+}
+
+export function openModalSave() {
+    return {
+        type: types.OPEN_MODAL_SAVE
+    };
+}
+
+export function closeModalSave() {
+    return {
+        type: types.CLOSE_MODAL_SAVE
     };
 }

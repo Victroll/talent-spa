@@ -1,22 +1,44 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import * as types from "../constants/actions";
+import { loadTalentTreeList, showLoadedTalentTree } from '../actions';
 
-function saveTalentTree(tree) {
-    return axios.put(
+function saveTalentTree(tree, name) {
+    return axios.post(
         'http://localhost:3210/saveTalentTree',
         {
-            crossdomain: true,
-            params: tree
+            tree: tree,
+            name: name
         });
 }
 
-function* saveTalents() {
+function getTalentTreeList() {
+    return axios.get(
+        'http://localhost:3210/getTalentTreeList'
+    );
+}
+
+function getTalentTree(name) {
+    return axios.get(
+        'http://localhost:3210/getTalentTree/' + name
+    );
+}
+
+function* loadTalentTree(data) {
+    const response = yield call(getTalentTree, data.name);
+    yield put(showLoadedTalentTree(response.data.talentTree));
+}
+
+function* fetchTalentTreeList() {
+    const response = yield call(getTalentTreeList);
+    yield put(loadTalentTreeList(response.data.list));
+}
+
+function* saveTalents(data) {
     const s = (state) => state;
     const st = yield select(s);
     const talentTree = getTalentTreeInfo(st);
-    console.log(talentTree);
-    const response = yield call(saveTalentTree, talentTree);
+    const response = yield call(saveTalentTree, talentTree, data.name);
 }
 
 function getTalentTreeInfo(state) {
@@ -47,7 +69,11 @@ function getTalentTreeInfo(state) {
 }
 
 function* watchServerActions() {
-    yield takeLatest(types.SAVE_TALENTS, saveTalents)
+    yield [
+        takeLatest(types.SAVE_TALENTS, saveTalents),
+        takeLatest(types.FETCH_TALENT_TREE_LIST, fetchTalentTreeList),
+        takeLatest(types.LOAD_TALENT_TREE, loadTalentTree)
+    ]
 }
 
 export default watchServerActions;

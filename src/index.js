@@ -17,10 +17,17 @@ const store = createStore(
         isOpen: false,
         trigger: new Set()
     },
+    modalList: {
+        isOpen: false,
+        treeList: []
+    },
     modalIcon: {
         isOpen: false
     },
     modalSettings: {
+        isOpen: false
+    },
+    modalSave: {
         isOpen: false
     },
     formIcon: {
@@ -30,6 +37,8 @@ const store = createStore(
     talentTreeSettings: {
         triggerValue: 'max'
     },
+    talentsToShow: [],
+    isLoading: false,
     editMode: true
 },applyMiddleware(sagaMiddleware),);
 
