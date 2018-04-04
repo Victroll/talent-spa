@@ -335,6 +335,14 @@ export default function(state, action) {
             });
 
             return newState;
+        case types.GO_TO_HOME:
+            return {...state,
+                currentPage: 'h'
+            };
+        case types.GO_TO_CREATE:
+            return {...state,
+                currentPage: 'c'
+            };
         default:
             return state;
     }

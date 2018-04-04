@@ -177,3 +177,15 @@ export function closeModalSave() {
         type: types.CLOSE_MODAL_SAVE
     };
 }
+
+export function goToHome() {
+    return {
+        type: types.GO_TO_HOME
+    };
+}
+
+export function goToCreate() {
+    return {
+        type: types.GO_TO_CREATE
+    };
+}

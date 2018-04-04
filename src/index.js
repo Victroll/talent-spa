@@ -39,7 +39,8 @@ const store = createStore(
     },
     talentsToShow: [],
     isLoading: false,
-    editMode: true
+    editMode: true,
+    currentPage: 'h'
 },applyMiddleware(sagaMiddleware),);
 
 sagaMiddleware.run(watchServerActions);

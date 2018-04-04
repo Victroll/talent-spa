@@ -1,10 +1,12 @@
 import React from 'react';
 import TalentTree from './talentTree';
+import Home from './home';
 import theme from '../toolbox/theme';
 import '../toolbox/theme.css';
 import '../flexboxgrid/react-flexbox-grid.css';
 import ThemeProvider from 'react-toolbox/lib/ThemeProvider';
 import TopBar from './topBar';
+import { connect } from 'react-redux';
 
 class App extends React.Component {
     render () {
@@ -12,11 +14,22 @@ class App extends React.Component {
             <ThemeProvider theme={ theme }>
             <div>
                 <TopBar />
-                <TalentTree />
+                { this.props.currentPage === 'c' ?
+                    <TalentTree /> :
+                    <Home /> 
+                }
             </div>
             </ThemeProvider>
         );
     }
 }
 
-export default App;
+const mapStateToProps = (store) => {
+    return {
+        currentPage: store.currentPage
+    };
+}
+
+export default connect(
+    mapStateToProps
+)(App);

@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { TALENT_TREE_CONTAINER_ID } from '../constants/names';
 import ModalTalent from './modalTalent';
 import ModalSettings from './modalSettings';
 import ModalList from './modalList';
@@ -61,7 +60,7 @@ class TalentTree extends React.Component {
             zIndexBoost: false,
             type: that.props.editMode ? "x,y" : "disabled",
             edgeResistance: 1,
-            bounds: "#talent-tree-container",
+            bounds: "#main-container",
             throwProps: true,
             liveSnap: true,
             snap: {
@@ -132,8 +131,8 @@ class TalentTree extends React.Component {
             talents.push(talentsObj[id].talent);
 
         return (
-            <div className="talent-tree-container" 
-            id={ TALENT_TREE_CONTAINER_ID }>
+            <div className='main-container'
+            id='main-container'>
                 <Row>
                     <Col xs={ 2 }>
                         <Button id='config-talents' icon='settings' onClick={ this.openModalSettings } raised disabled={ !this.props.editMode }/>

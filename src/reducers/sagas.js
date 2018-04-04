@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import * as types from "../constants/actions";
-import { loadTalentTreeList, showLoadedTalentTree } from '../actions';
+import { loadTalentTreeList, showLoadedTalentTree, closeModalList } from '../actions';
 
 function saveTalentTree(tree, name) {
     return axios.post(
@@ -26,6 +26,7 @@ function getTalentTree(name) {
 
 function* loadTalentTree(data) {
     const response = yield call(getTalentTree, data.name);
+    yield put(closeModalList());
     yield put(showLoadedTalentTree(response.data.talentTree));
 }
 
@@ -38,7 +39,7 @@ function* saveTalents(data) {
     const s = (state) => state;
     const st = yield select(s);
     const talentTree = getTalentTreeInfo(st);
-    const response = yield call(saveTalentTree, talentTree, data.name);
+    yield call(saveTalentTree, talentTree, data.name);
 }
 
 function getTalentTreeInfo(state) {

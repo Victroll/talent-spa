@@ -1,10 +1,11 @@
-.talent-tree-container {
+.main-container {
     height: 600px;
     width: 800px;
     padding-top: 4rem;
     padding-left: calc(50% - 400px);
     text-align: center;
     z-index: 1;
+    font-family: roboto;
 }
 
 .talent-tree-background {
@@ -38,11 +39,20 @@
 }
 
 .top-bar-button {
+    color: rgba(255, 255, 255, .6) !important;
+    padding: 5px 10px 5px 10px;
+}
+
+.top-bar-button.active, .top-bar-button:hover {
     color: white !important;
 }
 
 .top-bar h1 {
     max-width: calc(50% - 10rem);
+}
+
+.top-bar {
+    background-color: rgb(23, 36, 50) !important;
 }
 
 .no-padding {
@@ -64,6 +74,7 @@
     color: white;
     width: 10rem;
     animation: fade-in 1s;
+    font-size: 0.8rem;
 }
 
 .left-arrow {
@@ -94,6 +105,5 @@
 }
 
 .item-selected {
-    background: #EEEEEE
-    ;
+    background: #EEEEEE;
 }
