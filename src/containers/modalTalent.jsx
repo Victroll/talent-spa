@@ -68,12 +68,6 @@ class ModalTalent extends React.Component {
                 maxPoints: props.maxPoints,
                 triggersTalent: props.triggersTalent
             });
-        else
-            this.setState({...this.state,
-                name: props.name,
-                desc: props.desc,
-                triggersTalent: props.triggersTalent
-            });
     }
 
     render() {
@@ -83,7 +77,7 @@ class ModalTalent extends React.Component {
             onOverlayClick={ this.props.closeModal } >
                 <Row>
                     <Col xs={ 12 }>
-                        <Input id='talent-name' type='text' label='Name' value={ this.state.name } maxLength={ 12 } onChange={ (value) => this.updateField('name', value) } />
+                        <Input id='talent-name' type='text' label='Name' value={ this.state.name } maxLength={ 24 } onChange={ (value) => this.updateField('name', value) } />
                     </Col>
                 </Row>
                 <Row>

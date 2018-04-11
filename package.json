@@ -34,10 +34,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "cypress open",
     "eject": "react-scripts eject",
-    "toolbox": "react-toolbox-themr",
-    "cypress:open": "cypress open"
+    "toolbox": "react-toolbox-themr"
   },
   "devDependencies": {
     "cypress": "^2.1.0",

@@ -12,7 +12,7 @@ class FormIcon extends React.Component {
 		let icon = document.createElement('img');
 		icon.src = './images/icons/full.png';
 		icon.onload = () => {
-			let canvas = document.getElementById('iconCanvas');
+			let canvas = document.getElementById('icon-canvas');
 			let ctx = canvas.getContext('2d');
             ctx.drawImage(icon, 
                 this.props.posX * 128, 
@@ -31,7 +31,7 @@ class FormIcon extends React.Component {
     
     render() {
         return (
-            <canvas id='iconCanvas' height='80' width='80' 
+            <canvas id='icon-canvas' height='80' width='80' 
             onClick={ this.props.openIconModal }></canvas>
         );
     }

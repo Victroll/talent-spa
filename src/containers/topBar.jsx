@@ -27,9 +27,9 @@ class TopBar extends React.Component {
         return (
             <AppBar className='top-bar' fixed flat title='Talent tree creator' leftIcon={<i className="fas fa-tree"></i>}>
                 <Navigation type='horizontal'>
-                    <Link active className={ 'top-bar-button ' + homeActive } label='Home' onClick={ this.showHome }/>
-                    <Link active className={ 'top-bar-button ' + createActive } label='Create' onClick={ this.showCreate } />
-                    <Link active className='top-bar-button' href='https://github.com/Victroll'>
+                    <Link active id={ 'nav-home' } className={ 'top-bar-button ' + homeActive } label='Home' onClick={ this.showHome }/>
+                    <Link active id={ 'nav-create' } className={ 'top-bar-button ' + createActive } label='Create' onClick={ this.showCreate } />
+                    <Link active id={ 'nav-github' } className='top-bar-button' href='https://github.com/Victroll'>
                         <i className='fab fa-github' style={{ fontSize: '1.5em' }}></i>
                     </Link>
                 </Navigation>

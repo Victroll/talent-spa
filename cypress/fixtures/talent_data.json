@@ -1,0 +1,9 @@
+{
+    "name": "Repair turret",
+    "desc": "Repair your current turret for 25% of its max health",
+    "hasPoints": true,
+    "maxPoints": 4,
+    "posX": 4,
+    "posY": 7,
+    "saveName": "Single talent test"
+}
